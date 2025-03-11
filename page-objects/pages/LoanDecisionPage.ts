@@ -1,0 +1,17 @@
+import {Locator, Page} from "@playwright/test";
+
+export class LoanDecisionPage {
+    readonly page: Page;
+    readonly finalAmount: Locator;
+    readonly finalPeriod: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.finalAmount = page.getByTestId("final-page-amount");
+        this.finalPeriod = page.getByTestId("final-page-period");
+    }
+
+    async getFinalAmountValue(): Promise<string> {
+
+    }
+}
