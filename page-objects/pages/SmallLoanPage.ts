@@ -17,7 +17,6 @@ export class SmallLoanPage {
     readonly passwordInput: Input;
     readonly continueButton: Button;
 
-
     constructor(page: Page) {
         this.page = page;
         this.applyButton = new Button(page, "id-small-loan-calculator-field-apply");
@@ -26,15 +25,13 @@ export class SmallLoanPage {
         this.amountInput = new Input(page, "id-small-loan-calculator-field-amount");
         this.periodSelect = page.getByTestId("ib-small-loan-calculator-field-period");
         this.periodOptions = this.periodSelect.locator("option")
-        this.usernameInput = new Input();
-        this.passwordInput = new Input();
-        this.continueButton = new Button(page)
-
+        this.usernameInput = new Input(page, "login-popup-username-input");
+        this.passwordInput = new Input(page, "login-popup-password-input");
+        this.continueButton = new Button(page, "login-popup-continue-button");
     }
 
     async open(): Promise<void> {
-
-    await this.page
+    await this.page.goto(url);
 }
     async getFirstPeriodOption(): Promise<string> {
         const allOptions = await this.periodOptions.all();

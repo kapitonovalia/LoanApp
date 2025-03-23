@@ -12,6 +12,13 @@ export class LoanDecisionPage {
     }
 
     async getFinalAmountValue(): Promise<string> {
+        const text = await this.finalAmount.innerText();
 
+        return text.split(" ")[0];
+    }
+
+    async getFinalPeriodValue(): Promise<string> {
+        const text = await this.finalPeriod.innerText();
+        return text.split(" ")[0]
     }
 }

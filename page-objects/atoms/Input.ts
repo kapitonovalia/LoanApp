@@ -1,4 +1,4 @@
-import {Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 
 export class Input {
     readonly page: Page;
@@ -19,4 +19,5 @@ export class Input {
     async getCurrentValue(): Promise<string> {
         return await this.input.inputValue();
     }
+
 }
