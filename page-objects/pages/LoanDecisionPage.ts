@@ -21,4 +21,5 @@ export class LoanDecisionPage {
         const text = await this.finalPeriod.innerText();
         return text.split(" ")[0]
     }
+
 }
