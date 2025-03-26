@@ -16,6 +16,8 @@ export class SmallLoanPage {
     readonly usernameInput: Input;
     readonly passwordInput: Input;
     readonly continueButton: Button;
+    readonly amountSlider: Locator;
+    readonly periodSlider: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -28,14 +30,26 @@ export class SmallLoanPage {
         this.usernameInput = new Input(page, "login-popup-username-input");
         this.passwordInput = new Input(page, "login-popup-password-input");
         this.continueButton = new Button(page, "login-popup-continue-button");
+        this.amountSlider = page.getByTestId("id-small-loan-calculator-field-amount-slider")
+        this.periodSlider = page.getByTestId("ib-small-loan-calculator-field-period-slider")
     }
 
     async open(): Promise<void> {
-    await this.page.goto(url);
-}
+        await this.page.goto(url);
+    }
+
     async getFirstPeriodOption(): Promise<string> {
         const allOptions = await this.periodOptions.all();
 
         return await allOptions[0].innerText();
     }
+
+    async changeSliderValue(newValue: number): Promise<void> {
+        await this.amountSlider.fill(newValue.toString());
+    }
+
+    async changePeriodSliderValue(newValue: number): Promise<void> {
+        await this.periodSlider.fill(newValue.toString());
+    }
+
 }

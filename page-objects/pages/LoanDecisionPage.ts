@@ -4,11 +4,13 @@ export class LoanDecisionPage {
     readonly page: Page;
     readonly finalAmount: Locator;
     readonly finalPeriod: Locator;
+    readonly LoanDetails: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.finalAmount = page.getByTestId("final-page-amount");
         this.finalPeriod = page.getByTestId("final-page-period");
+        this.LoanDetails = page.locator('h1', { hasText: 'Loan Details' });
     }
 
     async getFinalAmountValue(): Promise<string> {
@@ -20,5 +22,9 @@ export class LoanDecisionPage {
     async getFinalPeriodValue(): Promise<string> {
         const text = await this.finalPeriod.innerText();
         return text.split(" ")[0]
+    }
+
+    async getPageTitle(): Promise<string> {
+        return await this.LoanDetails.innerText();
     }
 }
