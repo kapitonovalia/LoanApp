@@ -44,4 +44,5 @@ test.describe("Loan app tests", async () => {
     const title = await loanDecisionPage.getPageTitle();
     expect(title).toBe("Loan Details");
   });
+
 });
