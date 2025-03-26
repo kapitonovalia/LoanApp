@@ -20,4 +20,7 @@ export class Input {
         return await this.input.inputValue();
     }
 
+    async checkInView(): Promise<void> {
+        await expect(this.input).toBeInViewport()
+    }
 }
