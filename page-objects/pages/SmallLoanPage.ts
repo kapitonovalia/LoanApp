@@ -1,4 +1,4 @@
-import {Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 import {Button} from "../atoms/Button";
 import {Input} from "../atoms/Input";
 import {inflate} from "node:zlib";
@@ -18,6 +18,8 @@ export class SmallLoanPage {
     readonly continueButton: Button;
     readonly amountSlider: Locator;
     readonly periodSlider: Locator;
+    readonly monthlyAmountSpan: Locator;
+    readonly errorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -32,6 +34,8 @@ export class SmallLoanPage {
         this.continueButton = new Button(page, "login-popup-continue-button");
         this.amountSlider = page.getByTestId("id-small-loan-calculator-field-amount-slider")
         this.periodSlider = page.getByTestId("ib-small-loan-calculator-field-period-slider")
+        this.monthlyAmountSpan = page.getByTestId("ib-small-loan-calculator-field-monthlyPayment")
+        this.errorMessage = page.getByTestId("id-small-loan-calculator-field-error");
     }
 
     async open(): Promise<void> {
@@ -52,4 +56,11 @@ export class SmallLoanPage {
         await this.periodSlider.fill(newValue.toString());
     }
 
+    async checkMonthlyAmount(expected: number): Promise<void> {
+        const innerText = await this.monthlyAmountSpan.innerText();
+        const summ = +innerText.split(" ")[0];
+        expect(expected).toEqual(summ);
+
+
+    }
 }
