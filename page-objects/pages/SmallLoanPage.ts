@@ -60,7 +60,14 @@ export class SmallLoanPage {
         const innerText = await this.monthlyAmountSpan.innerText();
         const summ = +innerText.split(" ")[0];
         expect(expected).toEqual(summ);
-
-
     }
+
+async checkErrorMessage(): Promise<void> {
+    await expect(this.errorMessage).toContainText("Oops, something went wrong");
+}
+
+async checkPaymentUndefined(): Promise<void> {
+    const paymentErrorText = await this.monthlyAmountSpan.innerText();
+    expect(paymentErrorText).toContain("undefined");
+}
 }
